@@ -29,7 +29,7 @@ public class Objeto {
     @Override
     public String toString() {
         return "\nObjeto:" +
-                "\n nombre: " + nombre + '\'' +
+                "\n nombre: " + nombre +
                 "\n descripcion: " + descripcion;
     }
 }

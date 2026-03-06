@@ -16,20 +16,15 @@ public class Oferta {
         this.precioOfertado = precioOfertado;
     }
 
+    public Oferta() {
+    }
+
     public String getNombreOfertante() {
         return nombreOfertante;
     }
 
-    public void setNombreOfertante(String nombreOfertante) {
-        this.nombreOfertante = nombreOfertante;
-    }
-
     public int getPuntuacionOfertante() {
         return puntuacionOfertante;
-    }
-
-    public void setPuntuacionOfertante(int puntuacionOfertante) {
-        this.puntuacionOfertante = puntuacionOfertante;
     }
 
     public double getPrecioOfertado() {

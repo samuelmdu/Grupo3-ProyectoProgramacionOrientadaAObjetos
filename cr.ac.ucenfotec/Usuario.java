@@ -51,10 +51,6 @@ abstract class Usuario {
         return Period.between(fechaNacimiento, today).getYears();
     }
 
-    public void setEdad(int edad) {
-        this.edad = edad;
-    }
-
     public String getContrasenna() {
         return contrasenna;
     }

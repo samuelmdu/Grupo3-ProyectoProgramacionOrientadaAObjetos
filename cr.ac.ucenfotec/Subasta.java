@@ -10,12 +10,13 @@ public class Subasta {
     private Usuario usuarioCreador;
     private int puntuacionCreador;
     private double precioMinimoAceptable;
-    private boolean estadoSubasta;
+    private String estadoSubasta;
     private ArrayList<Objeto> listaObjetos;
 
-    public Subasta(LocalDateTime fechaVencimiento, Usuario usuarioCreador, double precioMinimoAceptable, boolean estadoSubasta) {
+    public Subasta(LocalDateTime fechaVencimiento, Usuario usuarioCreador, double precioMinimoAceptable) {
         this.fechaVencimiento = fechaVencimiento;
         this.tiempoRestante = getTiempoRestante();
+        this.usuarioCreador = usuarioCreador;
         // Revisa si el usuario es vendedor o coleccionista y asigna a puntuacionCreador, utilizando el .getPuntuacion.
         if (usuarioCreador instanceof UsuarioVendedor) {
           this.puntuacionCreador = ((UsuarioVendedor) usuarioCreador).getPuntuacion();
@@ -23,9 +24,8 @@ public class Subasta {
         else if (usuarioCreador instanceof UsuarioColeccionista) {
             this.puntuacionCreador = ((UsuarioColeccionista) usuarioCreador).getPuntuacion();
         }
-        this.usuarioCreador = usuarioCreador;
         this.precioMinimoAceptable = precioMinimoAceptable;
-        this.estadoSubasta = estadoSubasta;
+
         this.listaObjetos = new ArrayList<Objeto>();
     }
 
@@ -45,7 +45,9 @@ public class Subasta {
         LocalDateTime now = LocalDateTime.now();
 
         if(now.isAfter(fechaVencimiento)){
-            return "Subasta expirada";
+           estadoSubasta = "Subasta expirada";
+        } else {
+            estadoSubasta = "Subasta activa";
         }
 
         Duration duration = Duration.between(now, fechaVencimiento);
@@ -81,10 +83,6 @@ public class Subasta {
         return puntuacionCreador;
     }
 
-    public void setPuntuacionCreador(int puntuacionCreador) {
-        this.puntuacionCreador = puntuacionCreador;
-    }
-
     public double getprecioMinimoAceptable() {
         return precioMinimoAceptable;
     }
@@ -93,12 +91,8 @@ public class Subasta {
         this.precioMinimoAceptable = precioMinimoAceptable;
     }
 
-    public boolean isEstadoSubasta() {
+    public String getEstadoSubasta() {
         return estadoSubasta;
-    }
-
-    public void setEstadoSubasta(boolean estadoSubasta) {
-        this.estadoSubasta = estadoSubasta;
     }
 
     public ArrayList<Objeto> getListaObjetos() {
