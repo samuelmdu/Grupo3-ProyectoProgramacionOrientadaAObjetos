@@ -1,3 +1,5 @@
+package cr.ac.ucenfotec.bl;
+
 public class Objeto {
     private String nombre;
     private String descripcion;

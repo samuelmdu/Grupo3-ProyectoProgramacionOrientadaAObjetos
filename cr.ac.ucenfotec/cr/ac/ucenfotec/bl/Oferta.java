@@ -1,3 +1,5 @@
+package cr.ac.ucenfotec.bl;
+
 public class Oferta {
 
     private String nombreOfertante;

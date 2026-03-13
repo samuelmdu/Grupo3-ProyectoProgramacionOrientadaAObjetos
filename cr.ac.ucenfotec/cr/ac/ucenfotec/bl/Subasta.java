@@ -1,3 +1,5 @@
+package cr.ac.ucenfotec.bl;
+
 import java.util.ArrayList;
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -45,9 +47,9 @@ public class Subasta {
         LocalDateTime now = LocalDateTime.now();
 
         if(now.isAfter(fechaVencimiento)){
-           estadoSubasta = "Subasta expirada";
+           estadoSubasta = "cr.ac.ucenfotec.bl.Subasta expirada";
         } else {
-            estadoSubasta = "Subasta activa";
+            estadoSubasta = "cr.ac.ucenfotec.bl.Subasta activa";
         }
 
         Duration duration = Duration.between(now, fechaVencimiento);

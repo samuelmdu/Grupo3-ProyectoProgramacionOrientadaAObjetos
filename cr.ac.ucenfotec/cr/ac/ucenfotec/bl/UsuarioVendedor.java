@@ -1,3 +1,5 @@
+package cr.ac.ucenfotec.bl;
+
 import java.time.LocalDate;
 
 public class UsuarioVendedor extends Usuario{
@@ -6,8 +8,8 @@ public class UsuarioVendedor extends Usuario{
 
 
     //Constructores
-    public UsuarioVendedor(String nombreCompleto, int idUsuario, LocalDate fechaNacimiento, String contrasenna, String correoElectronico, int puntuacion, String direccion) {
-        super(nombreCompleto, idUsuario, fechaNacimiento, contrasenna, correoElectronico);
+    public UsuarioVendedor(String nombreCompleto, LocalDate fechaNacimiento, String contrasenna, String correoElectronico, int puntuacion, String direccion) {
+        super(nombreCompleto, fechaNacimiento, contrasenna, correoElectronico);
         this.puntuacion = puntuacion;
         this.direccion = direccion;
 
@@ -38,7 +40,7 @@ public class UsuarioVendedor extends Usuario{
     public String toString() {
         return "\nUsuario Vendedor:" +
                 "\n  Nombre completo : " + getNombreCompleto() +
-                "\n  ID Usuario      : " + getIdUsuario() +
+                "\n  Usuario         : " + getIdUsuario() +
                 "\n  Fecha nacimiento: " + getFechaNacimiento() +
                 "\n  Edad            : " + getEdad() +
                 "\n  Contraseña      : " + getContrasenna() +

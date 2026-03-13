@@ -1,3 +1,5 @@
+package cr.ac.ucenfotec.bl;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -9,8 +11,8 @@ public class UsuarioColeccionista extends Usuario {
 
 
     // Constructores
-    public UsuarioColeccionista(String nombreCompleto, int idUsuario, LocalDate fechaNacimiento, int edad, String contrasenna, String correoElectronico, int puntuacion, String direccion) {
-        super(nombreCompleto, idUsuario, fechaNacimiento, contrasenna, correoElectronico);
+    public UsuarioColeccionista(String nombreCompleto, LocalDate fechaNacimiento, int edad, String contrasenna, String correoElectronico, int puntuacion, String direccion) {
+        super(nombreCompleto, fechaNacimiento, contrasenna, correoElectronico);
         this.puntuacion = puntuacion;
         this.direccion = direccion;
     }
@@ -56,7 +58,7 @@ public class UsuarioColeccionista extends Usuario {
     public String toString() {
         return "\nUsuario Coleccionista:" +
                 "\n  Nombre completo : " + getNombreCompleto() +
-                "\n  ID Usuario      : " + getIdUsuario() +
+                "\n  Usuario         : " + getIdUsuario() +
                 "\n  Fecha nacimiento: " + getFechaNacimiento() +
                 "\n  Edad            : " + getEdad() +
                 "\n  Contraseña      : " + getContrasenna() +

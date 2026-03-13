@@ -1,9 +1,11 @@
+package cr.ac.ucenfotec.bl;
+
 import java.time.LocalDate;
 
 public class UsuarioModerador extends Usuario{
 
-    public UsuarioModerador(String nombreCompleto, int idUsuario, LocalDate fechaNacimiento, String contrasenna, String correoElectronico) {
-        super(nombreCompleto, idUsuario, fechaNacimiento, contrasenna, correoElectronico);
+    public UsuarioModerador(String nombreCompleto, LocalDate fechaNacimiento, String contrasenna, String correoElectronico) {
+        super(nombreCompleto, fechaNacimiento, contrasenna, correoElectronico);
     }
 
     public UsuarioModerador(){
@@ -13,7 +15,7 @@ public class UsuarioModerador extends Usuario{
     public String toString() {
         return "\nUsuario Moderador:" +
                 "\n  Nombre completo : " + getNombreCompleto() +
-                "\n  ID Usuario      : " + getIdUsuario() +
+                "\n  Usuario         : " + getIdUsuario() +
                 "\n  Fecha nacimiento: " + getFechaNacimiento() +
                 "\n  Edad            : " + getEdad() +
                 "\n  Contraseña      : " + getContrasenna() +
