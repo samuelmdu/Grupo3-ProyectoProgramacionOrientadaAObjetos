@@ -1,3 +1,6 @@
+package cr.ac.ucenfotec.ui;
+import cr.ac.ucenfotec.bl.*;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.LocalDate;
@@ -5,9 +8,10 @@ import java.time.LocalDateTime;
 
 public class Menu {
 
-    private ArrayList<Usuario> listaUsuarios = new ArrayList<>();
-    private ArrayList<Subasta> listaSubastas = new ArrayList<>();
-    private ArrayList<Oferta> listaOfertas = new ArrayList<>();
+    ArrayList<Usuario> listaUsuarios = new ArrayList<>();
+    ArrayList<Subasta> listaSubastas = new ArrayList<>();
+    ArrayList<Oferta> listaOfertas = new ArrayList<>();
+    boolean usuarioEncontrado = false;
 
     Scanner sc = new Scanner(System.in);
 
@@ -67,9 +71,6 @@ public class Menu {
         System.out.println("Nombre completo:");
         String nombre = sc.nextLine();
 
-        System.out.println("ID usuario:");
-        int id = sc.nextInt();
-
         System.out.println("Año nacimiento:");
         int anio = sc.nextInt();
 
@@ -105,51 +106,61 @@ public class Menu {
 
         if(tipo == 1){
 
-            UsuarioVendedor vendedor = new UsuarioVendedor(
-                    nombre,id,fecha,pass,correo,puntuacion,direccion
-            );
+            UsuarioVendedor vendedor = new UsuarioVendedor(nombre,fecha,pass,correo,puntuacion,direccion);
 
             listaUsuarios.add(vendedor);
 
         }else{
 
-            UsuarioColeccionista coleccionista = new UsuarioColeccionista(
-                    nombre,id,fecha,0,pass,correo,puntuacion,direccion
-            );
+            UsuarioColeccionista coleccionista = new UsuarioColeccionista(nombre,fecha,0,pass,correo,puntuacion,direccion);
 
             listaUsuarios.add(coleccionista);
 
         }
 
-        System.out.println("Usuario registrado!");
+        System.out.println("El usuario fue registrado correctamente.");
 
     }
 
     public void listarUsuarios(){
 
-        for(Usuario u : listaUsuarios){
+        if (listaUsuarios.isEmpty()){
+            System.out.println("Error: Vuelvalo a intentar, no se encontró ningun usuario registrado en el sistema.");
+            return;
+        }else{
+            for(Usuario u : listaUsuarios){
 
-            System.out.println(u);
+                System.out.println(u);
 
+            }
         }
 
     }
 
     public void crearSubasta(){
 
+        Usuario usuario = new Usuario(){};
+
         if(listaUsuarios.isEmpty()){
 
-            System.out.println("Primero debe registrar usuarios.");
+            System.out.println("Error: Vuelvalo a intentar, primero debe registrar usuarios en el sistema.");
             return;
 
         }
 
-        System.out.println("Indice del usuario creador:");
         listarUsuarios();
+        System.out.println("ID del usuario creador:");
 
-        int indice = sc.nextInt();
+        int id = sc.nextInt();
 
-        Usuario usuario = listaUsuarios.get(indice);
+        for (int i = 0; i < listaUsuarios.size(); i++) {
+            Usuario usuarioTemp = listaUsuarios.get(i);
+
+            if (usuarioTemp.getIdUsuario() == id){
+                usuarioEncontrado = true;
+                usuario = usuarioTemp;
+            }
+        }
 
         System.out.println("Precio minimo:");
         double precio = sc.nextDouble();
@@ -160,35 +171,49 @@ public class Menu {
 
         listaSubastas.add(subasta);
 
-        System.out.println("Subasta creada!");
+        System.out.println("La subasta fue creatada correctamente.");
 
     }
 
     public void listarSubastas(){
 
-        for(Subasta s : listaSubastas){
+        if (listaSubastas.isEmpty()){
+            System.out.println("Error: Vuelvalo a intentar, no se encontró ninguna subasta registrada en el sistema.");
+            return;
+        } else{
+            for(Subasta s : listaSubastas){
 
-            System.out.println(s);
+                System.out.println(s);
 
+            }
         }
+
 
     }
     public void crearOferta(){
 
+        Usuario usuario = new Usuario(){};
+
         if(listaUsuarios.isEmpty()){
 
-            System.out.println("Debe haber usuarios.");
+            System.out.println("Error: Vuelvalo a intentar, primero debe registrar usuarios en el sistema.");
             return;
 
         }
 
-        System.out.println("Seleccione usuario:");
-
         listarUsuarios();
 
-        int indice = sc.nextInt();
+        System.out.println("Seleccione el ID del usuario para crear la oferta:");
+        int id = sc.nextInt();
 
-        Usuario usuario = listaUsuarios.get(indice);
+        for (int i = 0; i < listaUsuarios.size(); i++) {
+            Usuario usuarioTemp = listaUsuarios.get(i);
+
+            if (usuarioTemp.getIdUsuario() == id){
+                usuarioEncontrado = true;
+                usuario = usuarioTemp;
+            }
+        }
 
         System.out.println("Precio ofertado:");
         double precio = sc.nextDouble();
@@ -197,11 +222,14 @@ public class Menu {
 
         listaOfertas.add(oferta);
 
-        System.out.println("Oferta creada!");
+        System.out.println("La oferta fue creada correctamente.");
 
     }
     public void listarOfertas(){
 
+        if (listaOfertas.isEmpty()){
+            System.out.println("Error: Vuelvalo a intentar, no se encontró ninguna oferta creada en el sistema.");
+        }
         for(Oferta o : listaOfertas){
 
             System.out.println(o);

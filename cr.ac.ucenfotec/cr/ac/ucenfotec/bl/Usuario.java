@@ -1,8 +1,13 @@
+package cr.ac.ucenfotec.bl;
+
 import java.time.LocalDate;
 import java.time.Period;
 
 
-abstract class Usuario {
+public abstract class Usuario {
+
+    private static int contadorId = 0;
+
     private String nombreCompleto;
     private int idUsuario;
     private LocalDate fechaNacimiento;
@@ -11,9 +16,9 @@ abstract class Usuario {
     private String correoElectronico;
 
 
-    public Usuario(String nombreCompleto, int idUsuario, LocalDate fechaNacimiento, String contrasenna, String correoElectronico) {
+    public Usuario(String nombreCompleto, LocalDate fechaNacimiento, String contrasenna, String correoElectronico) {
         this.nombreCompleto = nombreCompleto;
-        this.idUsuario = idUsuario;
+        this.idUsuario = ++contadorId;
         this.fechaNacimiento = fechaNacimiento;
         this.contrasenna = contrasenna;
         this.correoElectronico = correoElectronico;
@@ -32,10 +37,6 @@ abstract class Usuario {
 
     public int getIdUsuario() {
         return idUsuario;
-    }
-
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
     }
 
     public LocalDate getFechaNacimiento() {
@@ -73,7 +74,7 @@ abstract class Usuario {
     public String toString() {
         return "\nUsuario:" +
                 "\n  Nombre completo : " + nombreCompleto +
-                "\n  ID Usuario      : " + idUsuario +
+                "\n  Usuario         : " + getIdUsuario() +
                 "\n  Fecha nacimiento: " + fechaNacimiento +
                 "\n  Edad            : " + getEdad() +
                 "\n  Contraseña      : " + contrasenna +
