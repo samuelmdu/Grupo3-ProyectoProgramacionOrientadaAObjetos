@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import static cr.ac.ucenfotec.ui.MenuAdministrador.listaSubastas;
 import static cr.ac.ucenfotec.ui.MenuAdministrador.reader;
 
 public class MenuVendedor {
@@ -48,7 +49,7 @@ public class MenuVendedor {
                     break;
 
                 case 3:
-                    registrarSubasta(usuarioVendedor, listaSubastas);
+                    registrarSubasta(usuarioVendedor);
                     break;
 
                 case 4:
@@ -90,7 +91,7 @@ public class MenuVendedor {
         usuarioVendedor.setListaObjetos(insertarObjeto);
     }
 
-    private static void registrarSubasta(UsuarioVendedor usuarioVendedor, ArrayList<Subasta> listaSubastas) throws IOException {
+    private static void registrarSubasta(UsuarioVendedor usuarioVendedor) throws IOException {
 
         if (usuarioVendedor.getListaObjetos().isEmpty()){
             System.out.println("Error: lo sentimos usted no cuenta con objetos registrados.");
