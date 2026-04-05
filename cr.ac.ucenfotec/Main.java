@@ -1,11 +1,13 @@
-import cr.ac.ucenfotec.ui.Menu;
+
+import cr.ac.ucenfotec.ui.MenuAdministrador;
+
+import java.io.IOException;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
-        Menu menu = new Menu();
-        menu.mostrarMenu();
+        MenuAdministrador.mostrarMenu();
 
     }
 

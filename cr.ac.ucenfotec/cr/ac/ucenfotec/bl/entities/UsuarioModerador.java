@@ -1,4 +1,4 @@
-package cr.ac.ucenfotec.bl;
+package cr.ac.ucenfotec.bl.entities;
 
 import java.time.LocalDate;
 
@@ -6,9 +6,6 @@ public class UsuarioModerador extends Usuario{
 
     public UsuarioModerador(String nombreCompleto, LocalDate fechaNacimiento, String contrasenna, String correoElectronico) {
         super(nombreCompleto, fechaNacimiento, contrasenna, correoElectronico);
-    }
-
-    public UsuarioModerador(){
     }
 
     @Override
