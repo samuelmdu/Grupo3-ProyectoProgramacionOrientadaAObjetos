@@ -1,21 +1,25 @@
-package cr.ac.ucenfotec.bl;
+package cr.ac.ucenfotec.bl.entities;
 
-import java.util.ArrayList;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
 
 public class Subasta {
 
+    private static int contador;
+
+    private int idSubasta;
     private LocalDateTime fechaVencimiento;
     private String tiempoRestante;
     private Usuario usuarioCreador;
     private int puntuacionCreador;
     private double precioMinimoAceptable;
     private String estadoSubasta;
-    private ArrayList<Objeto> listaObjetos;
+    private Objeto objetoSubastar;
 
-    public Subasta(LocalDateTime fechaVencimiento, Usuario usuarioCreador, double precioMinimoAceptable) {
+
+    public Subasta(LocalDateTime fechaVencimiento, Usuario usuarioCreador, double precioMinimoAceptable, Objeto objetoSubastar) {
+        this.idSubasta = ++contador;
         this.fechaVencimiento = fechaVencimiento;
         this.tiempoRestante = getTiempoRestante();
         this.usuarioCreador = usuarioCreador;
@@ -27,8 +31,8 @@ public class Subasta {
             this.puntuacionCreador = ((UsuarioColeccionista) usuarioCreador).getPuntuacion();
         }
         this.precioMinimoAceptable = precioMinimoAceptable;
+        this.objetoSubastar = objetoSubastar;
 
-        this.listaObjetos = new ArrayList<Objeto>();
     }
 
     public Subasta() {
@@ -47,9 +51,9 @@ public class Subasta {
         LocalDateTime now = LocalDateTime.now();
 
         if(now.isAfter(fechaVencimiento)){
-           estadoSubasta = "cr.ac.ucenfotec.bl.Subasta expirada";
+           estadoSubasta = "Subasta expirada";
         } else {
-            estadoSubasta = "cr.ac.ucenfotec.bl.Subasta activa";
+            estadoSubasta = "Subasta activa";
         }
 
         Duration duration = Duration.between(now, fechaVencimiento);
@@ -97,23 +101,29 @@ public class Subasta {
         return estadoSubasta;
     }
 
-    public ArrayList<Objeto> getListaObjetos() {
-        return listaObjetos;
+    public Objeto getObjetoSubastar() {
+        return objetoSubastar;
     }
 
-    public void setListaObjetos(Objeto objeto) {
-        listaObjetos.add(objeto);
+    public void setObjetoSubastar(Objeto objetoSubastar) {
+        this.objetoSubastar = objetoSubastar;
+    }
+
+    public int getIdSubasta() {
+        return idSubasta;
     }
 
     @Override
     public String toString() {
         return "\nSubasta:" +
+                "\n  ID                : " + getIdSubasta() +
                 "\n  Fecha vencimiento : " + fechaVencimiento +
                 "\n  Tiempo restante   : " + tiempoRestante +
                 "\n  Usuario creador   : " + usuarioCreador.getNombreCompleto() +
                 "\n  Puntuación creador: " + puntuacionCreador +
                 "\n  Precio mínimo     : " + precioMinimoAceptable +
-                "\n  Lista objetos     : " + listaObjetos +
-                "\n  Estado subasta    : " + estadoSubasta;
+                "\n  Objeto a subastar : " + objetoSubastar.getNombre() +
+                "\n  Estado subasta    : " + estadoSubasta +
+                "\n";
     }
 }
