@@ -27,14 +27,18 @@ public class MenuAdministrador {
 
     public static void mostrarMenu() throws IOException {
 
-        UsuarioModerador usuarioModerador = new UsuarioModerador("samuel", LocalDate.of(2002, 10, 17), "123", "samuel@gmail.com");
-        moderadorCreado = true;
+        // USUARIOS DE PRUEBA
+//        UsuarioModerador usuarioModerador = new UsuarioModerador("samuel", LocalDate.of(2002, 10, 17), "123", "samuel@gmail.com");
+//        moderadorCreado = true;
+//
+//        UsuarioVendedor samuel = new UsuarioVendedor("Samuel", LocalDate.of(2002, 10, 17), "123", "samuel", 200, "San joaquin");
+//        listaVendedores.add(samuel);
+//
+//        UsuarioColeccionista samuelCole = new UsuarioColeccionista("Samuel", LocalDate.of(2002, 10, 17), "123", "samuel", 200, "San joaquin");
+//
+//        listaColeccionistas.add(samuelCole);
+//
 
-        UsuarioVendedor samuel = new UsuarioVendedor("Samuel", LocalDate.of(2002, 10, 17), "123", "samuel", 200, "San joaquin");
-        listaVendedores.add(samuel);
-
-        UsuarioColeccionista samuelCole = new UsuarioColeccionista("Samuel", LocalDate.of(2002, 10, 17), "123", "samuel", 200, "San joaquin");
-        listaColeccionistas.add(samuelCole);
 
         if (!moderadorCreado) {
 
@@ -255,7 +259,7 @@ public class MenuAdministrador {
             for (UsuarioVendedor temp : listaVendedores) {
                 if (temp.getCorreoElectronico().equalsIgnoreCase(correoElectronico) && temp.getContrasenna().equalsIgnoreCase(contrasennia)) {
                     usuarioActualVendedor = temp;
-                    MenuVendedor.mostrarMenu(usuarioActualVendedor, listaSubastas);
+                    MenuVendedor.mostrarMenu(usuarioActualVendedor);
                 }
             }
         }
@@ -264,7 +268,7 @@ public class MenuAdministrador {
             for (UsuarioColeccionista temp : listaColeccionistas) {
                 if (temp.getCorreoElectronico().equalsIgnoreCase(correoElectronico) && temp.getContrasenna().equalsIgnoreCase(contrasennia)) {
                     usuarioActualColeccionista = temp;
-                    MenuColeccionista.mostrarMenu(usuarioActualColeccionista, listaSubastas);
+                    MenuColeccionista.mostrarMenu(usuarioActualColeccionista);
                 }
             }
         }

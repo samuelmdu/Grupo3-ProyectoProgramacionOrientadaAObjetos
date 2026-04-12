@@ -2,23 +2,28 @@ package cr.ac.ucenfotec.bl.entities;
 
 public class Oferta {
 
+    private static int contador = 0;
+
+    private int idOferta;
     private String nombreOfertante;
     private int puntuacionOfertante;
     private double precioOfertado;
+    private UsuarioColeccionista usuarioColeccionista;
 
-    public Oferta(Usuario usuario, double precioOfertado) {
+    public Oferta(UsuarioColeccionista usuario, double precioOfertado) {
+        this.idOferta = ++contador;
         this.nombreOfertante = usuario.getNombreCompleto();
-        // Revisa si el usuario es vendedor o coleccionista y asigna a puntuacionCreador, utilizando el .getPuntuacion.
-        if (usuario instanceof UsuarioVendedor) {
-            this.puntuacionOfertante = ((UsuarioVendedor) usuario).getPuntuacion();
-        }
-        else if (usuario instanceof UsuarioColeccionista) {
-            this.puntuacionOfertante = ((UsuarioColeccionista) usuario).getPuntuacion();
-        }
+        this.puntuacionOfertante = usuario.getPuntuacion();
         this.precioOfertado = precioOfertado;
+        this.usuarioColeccionista = usuario;
+
     }
 
     public Oferta() {
+    }
+
+    public int getIdOferta() {
+        return idOferta;
     }
 
     public String getNombreOfertante() {
@@ -37,9 +42,15 @@ public class Oferta {
         this.precioOfertado = precioOfertado;
     }
 
+    public UsuarioColeccionista getUsuarioColeccionista() {
+        return usuarioColeccionista;
+    }
+
+
     @Override
     public String toString() {
         return "\nOferta:" +
+                "\n  ID                 : " + getIdOferta() +
                 "\n  Nombre ofertante   : " + nombreOfertante +
                 "\n  Puntuación ofertor : " + puntuacionOfertante +
                 "\n  Precio ofertado    : " + precioOfertado;
