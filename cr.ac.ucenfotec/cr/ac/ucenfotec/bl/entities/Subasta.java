@@ -2,6 +2,7 @@ package cr.ac.ucenfotec.bl.entities;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 
 public class Subasta {
@@ -16,6 +17,7 @@ public class Subasta {
     private double precioMinimoAceptable;
     private String estadoSubasta;
     private Objeto objetoSubastar;
+    private java.util.ArrayList<Oferta> listaOfertas = new java.util.ArrayList<>();
 
 
     public Subasta(LocalDateTime fechaVencimiento, Usuario usuarioCreador, double precioMinimoAceptable, Objeto objetoSubastar) {
@@ -25,7 +27,7 @@ public class Subasta {
         this.usuarioCreador = usuarioCreador;
         // Revisa si el usuario es vendedor o coleccionista y asigna a puntuacionCreador, utilizando el .getPuntuacion.
         if (usuarioCreador instanceof UsuarioVendedor) {
-          this.puntuacionCreador = ((UsuarioVendedor) usuarioCreador).getPuntuacion();
+            this.puntuacionCreador = ((UsuarioVendedor) usuarioCreador).getPuntuacion();
         }
         else if (usuarioCreador instanceof UsuarioColeccionista) {
             this.puntuacionCreador = ((UsuarioColeccionista) usuarioCreador).getPuntuacion();
@@ -51,7 +53,7 @@ public class Subasta {
         LocalDateTime now = LocalDateTime.now();
 
         if(now.isAfter(fechaVencimiento)){
-           estadoSubasta = "Subasta expirada";
+            estadoSubasta = "Subasta expirada";
         } else {
             estadoSubasta = "Subasta activa";
         }
@@ -112,6 +114,16 @@ public class Subasta {
     public int getIdSubasta() {
         return idSubasta;
     }
+
+    public void agregarOferta(Oferta oferta) {
+        listaOfertas.add(oferta);
+    }
+
+    public ArrayList<Oferta> getListaOfertas() {
+        return listaOfertas;
+    }
+
+
 
     @Override
     public String toString() {

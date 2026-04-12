@@ -1,8 +1,6 @@
 package cr.ac.ucenfotec.ui;
 
-import cr.ac.ucenfotec.bl.entities.Objeto;
-import cr.ac.ucenfotec.bl.entities.Subasta;
-import cr.ac.ucenfotec.bl.entities.UsuarioVendedor;
+import cr.ac.ucenfotec.bl.entities.*;
 import cr.ac.ucenfotec.bl.exceptions.ExceptionFechaInvalida;
 import cr.ac.ucenfotec.bl.exceptions.ExceptionNumeroInvalido;
 
@@ -17,7 +15,7 @@ import static cr.ac.ucenfotec.ui.MenuAdministrador.reader;
 
 public class MenuVendedor {
 
-    public static void mostrarMenu(UsuarioVendedor usuarioVendedor, ArrayList<Subasta> listaSubastas) throws IOException {
+    public static void mostrarMenu(UsuarioVendedor usuarioVendedor) throws IOException {
 
         byte opcionMenuPrincipal = 0;
 
@@ -29,6 +27,7 @@ public class MenuVendedor {
             System.out.println("2. Ver mis objetos registrados");
             System.out.println("3. Crear subasta");
             System.out.println("4. Ver mis subastas creadas");
+            System.out.println("5. Concluir subasta");
             System.out.println("0. Cerrar sesión");
 
             try {
@@ -45,16 +44,28 @@ public class MenuVendedor {
                     break;
 
                 case 2:
+
+                    if (usuarioVendedor.getListaObjetos().isEmpty()){
+                        System.out.println("Error: usted no cuenta con subastas creadas.");
+                    }
                     System.out.println(usuarioVendedor.getListaObjetos());
                     break;
+
 
                 case 3:
                     registrarSubasta(usuarioVendedor);
                     break;
 
                 case 4:
+                    if (usuarioVendedor.getListaSubastas().isEmpty()){
+                        System.out.println("Error: usted no cuenta con subastas creadas.");
+                    }
                     System.out.println(usuarioVendedor.getListaSubastas());
                     break;
+                case 5:
+                    concluirSubasta(usuarioVendedor);
+                    break;
+
 
                 case 0:
                     System.out.println("Cerrando sesión.");
@@ -123,7 +134,6 @@ public class MenuVendedor {
         if (!objetoEncontrado) {
             System.out.println("Error: No se encontró el objeto para la subasta.");
         } else {
-
             LocalDateTime fechaVencimiento = null;
             try {
                 System.out.print("Ingrese la fecha y hora de vencimiento (YYYY-MM-DD HH:MM): ");
@@ -142,10 +152,66 @@ public class MenuVendedor {
                 return;
             }
 
+            // ACA
             Subasta insertarSubasta = new Subasta(fechaVencimiento, usuarioVendedor, precioMinimoAceptable, objetoSubastar);
             usuarioVendedor.setListaSubastas(insertarSubasta);
             listaSubastas.add(insertarSubasta);
         }
         }
     }
+
+    private static void concluirSubasta(UsuarioVendedor usuarioVendedor) throws IOException {
+
+        if (usuarioVendedor.getListaSubastas().isEmpty()) {
+            System.out.println("Error: usted no cuenta con subastas creadas.");
+            return;
+        }
+
+        System.out.println(usuarioVendedor.getListaSubastas());
+        System.out.println("\n");
+
+        byte opcSubasta = 0;
+
+        try {
+            System.out.println("Ingrese el id de la subasta a concluir.");
+            opcSubasta = Byte.parseByte(reader.readLine());
+        } catch (IOException e) {
+            throw new ExceptionNumeroInvalido();
+        }
+
+        for (int i = 0; i < usuarioVendedor.getListaSubastas().size(); i++) {
+
+            Subasta tempSubasta = usuarioVendedor.getListaSubastas().get(i);
+
+            if (tempSubasta.getIdSubasta() == opcSubasta) {
+
+                if (tempSubasta.getListaOfertas().isEmpty()) {
+                    System.out.println("Error: no hay ofertas asociadas a esta subasta.");
+                    return;
+                }
+
+                double mayor = 0;
+                Oferta mayorOferta = null;
+
+                for (int j = 0; j < tempSubasta.getListaOfertas().size(); j++) {
+                    Oferta ofertaActual = tempSubasta.getListaOfertas().get(j);
+
+                    if (ofertaActual.getPrecioOfertado() > mayor) {
+                        mayor = ofertaActual.getPrecioOfertado();
+                        mayorOferta = ofertaActual;
+                    }
+                }
+
+                System.out.println("Ganador: " + mayorOferta.getNombreOfertante());
+                mayorOferta.getUsuarioColeccionista().setListaObjetos(tempSubasta.getObjetoSubastar());
+
+                listaSubastas.remove(i);
+                usuarioVendedor.getListaSubastas().remove(i);
+                usuarioVendedor.getListaObjetos().remove(i);
+                break;
+            }
+        }
+    }
 }
+
+

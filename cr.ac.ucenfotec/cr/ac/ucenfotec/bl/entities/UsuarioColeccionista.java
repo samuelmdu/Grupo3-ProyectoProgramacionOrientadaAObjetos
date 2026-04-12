@@ -6,10 +6,9 @@ import java.util.ArrayList;
 public class UsuarioColeccionista extends Usuario {
     private int puntuacion;
     private String direccion;
-    private ArrayList<Objeto> listaIntereses;
-    private ArrayList<Objeto> listaObjetos;
+    private ArrayList<Subasta> listaIntereses = new ArrayList<>();
+    private ArrayList<Objeto> listaObjetos = new ArrayList<>();
 
-    // Constructores
     public UsuarioColeccionista(String nombreCompleto, LocalDate fechaNacimiento, String contrasenna, String correoElectronico, int puntuacion, String direccion) {
         super(nombreCompleto, fechaNacimiento, contrasenna, correoElectronico);
         this.puntuacion = puntuacion;
@@ -19,7 +18,6 @@ public class UsuarioColeccionista extends Usuario {
     public UsuarioColeccionista(){
     }
 
-    // Getter & Setter
     public int getPuntuacion() {
         return puntuacion;
     }
@@ -36,12 +34,12 @@ public class UsuarioColeccionista extends Usuario {
         this.direccion = direccion;
     }
 
-    public ArrayList<Objeto> getListaIntereses() {
+    public ArrayList<Subasta> getListaIntereses() {
         return listaIntereses;
     }
 
-    public void setListaIntereses(Objeto objeto) {
-        listaIntereses.add(objeto);
+    public void agregarInteres(Subasta subasta) {
+        listaIntereses.add(subasta);
     }
 
     public ArrayList<Objeto> getListaObjetos() {
@@ -49,9 +47,8 @@ public class UsuarioColeccionista extends Usuario {
     }
 
     public void setListaObjetos(Objeto objeto) {
-        listaIntereses.add(objeto);
+        listaObjetos.add(objeto);
     }
-
 
     @Override
     public String toString() {
@@ -63,7 +60,6 @@ public class UsuarioColeccionista extends Usuario {
                 "\n  Edad            : " + getEdad() +
                 "\n  Contraseña      : " + getContrasenna() +
                 "\n  Intereses       : " + listaIntereses +
-                "\n  Objetos         : " + listaObjetos ;
-
-     }
+                "\n  Objetos         : " + listaObjetos;
+    }
 }
