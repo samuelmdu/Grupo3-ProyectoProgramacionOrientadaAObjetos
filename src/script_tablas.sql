@@ -62,13 +62,15 @@ CREATE TABLE t_oferta (
 );
 
 
--- SELECT --- 
+-- SELECT
 SELECT * FROM t_usuarios_moderador;
 SELECT * FROM t_usuarios_vendedor;
 SELECT * FROM t_usuarios_coleccionista;
 SELECT * FROM t_objetos;
 SELECT * FROM t_subasta;
 SELECT * FROM t_oferta;
+
+DELETE * FROM t_usuarios_moderador;
 
 DROP TABLE t_oferta;
 DROP TABLE t_subasta;
