@@ -33,11 +33,12 @@ CREATE TABLE t_usuarios_coleccionista (
 );
 
 CREATE TABLE t_objetos (
-    id          INTEGER(10) PRIMARY KEY,
-    nombre      VARCHAR(50),
-    descripcion VARCHAR(100),
-    fechaCompra DATE,
-    estado      VARCHAR(20)
+    id             INTEGER(10) PRIMARY KEY,
+    nombre         VARCHAR(50),
+    descripcion    VARCHAR(100),
+    fechaCompra    DATE,
+    estado         VARCHAR(20),
+    correoCreador  VARCHAR(30)
 );
 
 CREATE TABLE t_subasta (
@@ -46,9 +47,9 @@ CREATE TABLE t_subasta (
     puntuacionCreador      INTEGER(10),
     precioMinimoAceptable  DOUBLE,
     estadoSubasta          VARCHAR(20),
-    idUsuarioVendedor      VARCHAR(30),
-    idUsuarioColeccionista VARCHAR(30),
-    idObjeto               INTEGER(10)
+    idObjeto               INTEGER(10),
+    nombreObjeto           VARCHAR(10),
+    correoCreador          VARCHAR(30)
 );
 
 CREATE TABLE t_oferta (
@@ -56,9 +57,18 @@ CREATE TABLE t_oferta (
     nombreOfertante        VARCHAR(15),
     puntuacionOfertante    INTEGER(3),
     precioOfertado         DOUBLE,
-    idUsuarioColeccionista VARCHAR(30),
-    idSubasta              INTEGER(10)
+    idSubasta              INTEGER(10),
+    correoCreador  VARCHAR(30)
 );
+
+
+-- SELECT --- 
+SELECT * FROM t_usuarios_moderador;
+SELECT * FROM t_usuarios_vendedor;
+SELECT * FROM t_usuarios_coleccionista;
+SELECT * FROM t_objetos;
+SELECT * FROM t_subasta;
+SELECT * FROM t_oferta;
 
 DROP TABLE t_oferta;
 DROP TABLE t_subasta;
@@ -66,11 +76,3 @@ DROP TABLE t_objetos;
 DROP TABLE t_usuarios_coleccionista;
 DROP TABLE t_usuarios_vendedor;
 DROP TABLE t_usuarios_moderador;
-
--- SELECT
-SELECT * FROM t_usuarios_moderador;
-SELECT * FROM t_usuarios_vendedor;
-SELECT * FROM t_usuarios_coleccionista;
-SELECT * FROM t_objetos;
-SELECT * FROM t_subasta;
-SELECT * FROM t_oferta;
