@@ -6,10 +6,8 @@ import java.time.Period;
 
 public abstract class Usuario {
 
-    private static int contadorId = 0;
-
-    private String nombreCompleto;
     private int idUsuario;
+    private String nombreCompleto;
     private LocalDate fechaNacimiento;
     private int edad; // Edad se calcula basandose en fechaNacimiento
     private String contrasenna;
@@ -18,7 +16,7 @@ public abstract class Usuario {
 
     public Usuario(String nombreCompleto, LocalDate fechaNacimiento, String contrasenna, String correoElectronico) {
         this.nombreCompleto = nombreCompleto;
-        this.idUsuario = ++contadorId;
+        this.idUsuario = (int) (Math.random() * 9000) + 1000;
         this.fechaNacimiento = fechaNacimiento;
         this.contrasenna = contrasenna;
         this.correoElectronico = correoElectronico;
@@ -37,6 +35,10 @@ public abstract class Usuario {
 
     public int getIdUsuario() {
         return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public LocalDate getFechaNacimiento() {

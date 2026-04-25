@@ -4,8 +4,8 @@ import java.time.LocalDate;
 
 public class UsuarioModerador extends Usuario{
 
-    public UsuarioModerador(String nombreCompleto, LocalDate fechaNacimiento, String contrasenna, String correoElectronico) {
-        super(nombreCompleto, fechaNacimiento, contrasenna, correoElectronico);
+    public UsuarioModerador() {
+        super("admin", LocalDate.of(01,01,01), "123", "admin");
     }
 
     @Override
