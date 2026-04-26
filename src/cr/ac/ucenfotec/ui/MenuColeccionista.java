@@ -38,15 +38,17 @@ public class MenuColeccionista {
                     break;
 
                 case 3:
-
+                    Controlador.agregarInteres(usuarioColeccionista);
                     break;
 
                 case 4:
-
+                    Controlador.verIntereses(usuarioColeccionista);
                     break;
+
                 case 5:
-
+                    Controlador.verColeccion(usuarioColeccionista);
                     break;
+
                 case 0:
                     System.out.println("Cerrando sesión.");
                     break;

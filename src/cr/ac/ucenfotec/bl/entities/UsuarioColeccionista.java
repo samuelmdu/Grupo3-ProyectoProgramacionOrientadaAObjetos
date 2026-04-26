@@ -7,6 +7,9 @@ public class UsuarioColeccionista extends Usuario {
     private int puntuacion;
     private String direccion;
 
+    private ArrayList<Subasta> intereses = new ArrayList<>();
+    private ArrayList<Objeto> coleccion = new ArrayList<>();
+
     public UsuarioColeccionista(String nombreCompleto, LocalDate fechaNacimiento, String contrasenna, String correoElectronico, int puntuacion, String direccion) {
         super(nombreCompleto, fechaNacimiento, contrasenna, correoElectronico);
         this.puntuacion = puntuacion;
@@ -32,6 +35,21 @@ public class UsuarioColeccionista extends Usuario {
         this.direccion = direccion;
     }
 
+    public void agregarInteres(Subasta subasta) {
+        intereses.add(subasta);
+    }
+
+    public ArrayList<Subasta> getIntereses() {
+        return intereses;
+    }
+
+    public ArrayList<Objeto> getColeccion(){
+        return coleccion;
+    }
+
+    public void agregarObjetoColeccion(Objeto objeto) {
+        coleccion.add(objeto);
+    }
 
     @Override
     public String toString() {

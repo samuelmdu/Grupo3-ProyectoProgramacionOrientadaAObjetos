@@ -25,4 +25,8 @@ public class GestorObjeto {
         DAOObjeto.actualizarDuennoObjeto(idObjeto, correoGanador);
     }
 
+    public static void imprimirObjetosColeccionista(String correoColeccionista) throws SQLException, IOException, ClassNotFoundException {
+        DAOObjeto.imprimirObjetosColeccionista(correoColeccionista);
+    }
+
 }
