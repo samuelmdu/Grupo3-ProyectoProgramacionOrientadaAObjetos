@@ -305,6 +305,10 @@ public class Controlador {
 
     }
 
+    public static void imprimirObjetosColeccionista(UsuarioColeccionista usuarioColeccionista) throws IOException, SQLException, ClassNotFoundException {
+        GestorObjeto.imprimirObjetosColeccionista(usuarioColeccionista.getCorreoElectronico());
+    }
+
     // -- CONCLUIR SUBASTA -- //
 
     public static void concluirSubasta(UsuarioVendedor usuarioVendedor) throws IOException, SQLException, ClassNotFoundException {
@@ -336,5 +340,40 @@ public class Controlador {
 
         System.out.println("Subasta concluida exitosamente.");
         System.out.println("El objeto '" + subastaEncontrada.getNombreObjeto() + "' fue transferido a: " + ofertaMayor.getNombreOfertante());
+    }
+
+    public static void agregarInteres(UsuarioColeccionista usuarioColeccionista) throws IOException, SQLException, ClassNotFoundException {
+
+        imprimirSubastasActivas();
+
+        Subasta subastaEncontrada = buscarSubasta();
+
+        if (subastaEncontrada == null) {
+            System.out.println("Error: la subasta no fue encontrada.");
+            return;
+        }
+
+        usuarioColeccionista.agregarInteres(subastaEncontrada);
+
+        System.out.println("Interés agregado correctamente: " + subastaEncontrada.getNombreObjeto());
+    }
+
+    public static void verIntereses(UsuarioColeccionista usuarioColeccionista) {
+
+        if (usuarioColeccionista.getIntereses().isEmpty()) {
+            System.out.println("Error: usted no tiene intereses registrados.");
+            return;
+        }
+
+        System.out.println("\n--- INTERESES ---");
+        for (Subasta subasta : usuarioColeccionista.getIntereses()) {
+            System.out.println(subasta);
+        }
+    }
+
+    public static void verColeccion(UsuarioColeccionista usuarioColeccionista) throws SQLException, IOException, ClassNotFoundException {
+
+        GestorObjeto.imprimirObjetosColeccionista(usuarioColeccionista.getCorreoElectronico());
+
     }
 }

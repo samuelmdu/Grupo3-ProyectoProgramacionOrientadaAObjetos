@@ -40,6 +40,11 @@ public class DAOSubasta {
         query = "SELECT * FROM t_subasta WHERE correoCreador = ?";
         ResultSet resultado = Conector.getConexion().ejecutarQuery(query, correoCreador);
 
+        if (!resultado.isBeforeFirst()) {
+            System.out.println("Error: no tiene subastas registradas.");
+            return;
+        }
+
         while (resultado.next()) {
             Subasta subasta = new Subasta(
                     resultado.getInt("idObjeto"),
@@ -59,6 +64,11 @@ public class DAOSubasta {
 
         query = "SELECT * FROM t_subasta WHERE estadoSubasta = ?";
         ResultSet resultado = Conector.getConexion().ejecutarQuery(query, "Activa");
+
+        if (!resultado.isBeforeFirst()) {
+            System.out.println("Error: no hay subastas activas en este momento.");
+            return;
+        }
 
         while (resultado.next()) {
             Subasta subasta = new Subasta(

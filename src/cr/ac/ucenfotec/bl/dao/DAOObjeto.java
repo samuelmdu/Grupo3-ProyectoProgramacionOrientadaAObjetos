@@ -37,6 +37,34 @@ public class DAOObjeto {
         query = "SELECT * FROM t_objetos WHERE correoCreador = ?";
         ResultSet resultado = Conector.getConexion().ejecutarQuery(query, correoCreador);
 
+        if (!resultado.isBeforeFirst()) {
+            System.out.println("Error: no tiene objetos registrados.");
+            return;
+        }
+
+        while (resultado.next()) {
+            Objeto objeto = new Objeto(
+                    resultado.getString("nombre"),
+                    resultado.getString("descripcion"),
+                    resultado.getDate("fechaCompra").toLocalDate(),
+                    resultado.getString("estado"),
+                    resultado.getString("correoCreador")
+            );
+            objeto.setIdObjeto(resultado.getInt("id"));
+            System.out.println(objeto);
+        }
+    }
+
+    public static void imprimirObjetosColeccionista(String correoColeccionista) throws SQLException, IOException, ClassNotFoundException {
+
+        query = "SELECT * FROM t_objetos WHERE correoCreador = ?";
+        ResultSet resultado = Conector.getConexion().ejecutarQuery(query, correoColeccionista);
+
+        if (!resultado.isBeforeFirst()) {
+            System.out.println("Error: no tiene objetos en su colección.");
+            return;
+        }
+
         while (resultado.next()) {
             Objeto objeto = new Objeto(
                     resultado.getString("nombre"),
